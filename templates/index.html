@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market on Lockdown</title>
+    
+</head>
+<body>
+    <h1>Stock Market on Lockdown</h1>
+    
+    <!--User selects sector to view.-->
+    <select name="sector" id="sector" onchange="generateLineGraph(this.value)">
+        <option value="finance" selected>Finance</option>
+        <option value="socialMedia">Social Media</option>
+        <option value="healthcare">Healthcare</option>
+        <option value="retail">Retail</option>
+    </select>
+
+    <div id="multiplot"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!--Company metadata.-->
+    <script src="static/js/metadata.js"></script>
+
+    <!--Code for generating plots.-->
+    <script src="static/js/code.js"></script>
+</body>
+</html>
