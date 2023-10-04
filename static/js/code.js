@@ -4,11 +4,44 @@ function generateLineGraph(selection) {
 
     // Create initial graph.
     let data = [];
+    firstCase = 0.29;
+
     layout = {
-        // CHANGE THIS
-        title: `EDIT ME Sector`,
+        title: selection === 'finance' ? 'Finance Stocks':
+               selection === 'socialMedia' ? 'Social Media Stocks':
+               selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
         width: 1500,
         height: 700,
+        xaxis: {
+            nticks: 13, 
+            tickmode: 'auto'},
+        yaxis: {title: 'Stock Price (USD)'},
+        shapes: [
+        {
+            type: 'line',
+            xref: 'paper',
+            yref: 'paper',
+            x0: firstCase,
+            y0: 0,
+            x1: firstCase,
+            y1: 1,
+            line: {
+            color: 'grey',
+            width: 1.5,
+            dash: 'dot'
+            }
+        }
+        ],
+        annotations: [{
+            xref: 'paper',
+            yref: 'paper',
+            x: 0.3,
+            y: 1,
+            //************Change to hover-over text?
+            text: 'First Recorded Covid-19 Case in US <br> 01/20/2020',
+            // textangle: -90,
+            showarrow: false
+        }]
     };
 
     Plotly.newPlot("multiplot", data, layout);
