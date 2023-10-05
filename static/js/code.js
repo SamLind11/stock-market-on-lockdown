@@ -1,5 +1,6 @@
 // Code to generate overlapping line plots for a sector from user input.
 function generateLineGraph(selection) {
+
     let userChoice = meta[selection];
 
     // Create initial graph.
@@ -16,6 +17,8 @@ function generateLineGraph(selection) {
             nticks: 13, 
             tickmode: 'auto'},
         yaxis: {title: 'Stock Price (USD)'},
+
+        // Vertical line for first case of COVID date.
         shapes: [
         {
             type: 'line',
@@ -50,23 +53,21 @@ function generateLineGraph(selection) {
         // Generate url.
         let stockSymbol = userChoice[i].symbol; 
         let stockName = userChoice[i].name;
-        let link = `https://samlind11.github.io/stock-market-on-lockdown/json/${stockSymbol}.json`;
+        let link = `http://127.0.0.1:5000/api/data/${stockSymbol}`;
 
-        // Fetch json data from Github.
+        // Fetch json data from Flask API.
         d3.json(link).then(response => {
 
-            dates = Object.keys(response);
-            values =[];
-            
-            // Loop through all dates and add the corresponding stock price to values.
-            for (let i = 0; i < dates.length; i++) {
-                values.push(response[dates[i]]["high"]);
+            dates= [];
+            highs = [];
+            for (let i = 0; i < response.length; i++) {
+                dates.push(response[i]['date'])
+                highs.push(response[i]['high'])
             }
-
             // Create the trace for the data.
             trace = {
                 x: dates,
-                y: values,
+                y: highs,
                 type: "scatter",
                 name: `${stockName} (${stockSymbol.toUpperCase()})`,
                 text: stockSymbol.toUpperCase()
