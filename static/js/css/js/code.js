@@ -130,10 +130,8 @@ function generateBarGraph(selection) {
                 Plotly.newPlot("bar", [trace], layout);
 
         });
-<<<<<<< HEAD:static/js/css/js/code.js
     }
 }
-=======
 
         for(var sector in sectorAverages) {
             sectorAverages[sector].averag = sectorAverages[sector].total / sectorAverages[sector].count;
@@ -229,4 +227,3 @@ function fetchDataAndCreateChart(selectSymbol) {
     });
 }
 fetchDataAndCreateChart('wfc');
->>>>>>> main:static/js/code.js
