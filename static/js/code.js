@@ -144,3 +144,62 @@ function generateGroupBarChart(selection) {
                     }
                 }
         });
+        function fetchDataAndCreateChart(selectSymbol) {
+            // URL to JSON data on GitHub
+            selectSymbol = selectSymbol.toLowerCase(); //SAM EDIT
+             let dataURL = `http://127.0.0.1:5000/api/data/${selectSymbol}`;
+        
+            d3.json(dataURL).then(response => {
+        
+                dates= [];
+                // highs = [];
+                // lows = []; 
+                gainsandlosses = [];
+        
+                for (let i = 0; i < response.length; i++) {
+                    dates.push(response[i]['date'])
+                    // highs.push(response[i]['high'])
+                    // lows.push(response[i]['low'])
+                    let change = response[i]['close'] - response[i]['open'];
+                    gainsandlosses.push(change);
+        
+                }
+                 //Create chart instance
+            new Chart(document.getElementById('bar-chart'), {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: 'Gain/Loss',
+                            data: gainsandlosses,
+                            backgroundColor: gainsandlosses.map(value => (value >= 0 ? 'green' : 'red'))
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Gains and Losses Over Time'
+                    },
+                    scales: {
+                        xAxis: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                display: true,
+                                text: 'Gain/Loss'
+                            }
+                        }
+                    }
+                }
+            });
+            });
+        }
+        fetchDataAndCreateChart('wfc');
+        
