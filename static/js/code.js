@@ -11,12 +11,17 @@ function generateLineGraph(selection) {
         title: selection === 'finance' ? 'Finance Stocks':
                selection === 'socialMedia' ? 'Social Media Stocks':
                selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
-        width: 1500,
-        height: 700,
+        width: 1480,
+        height: 400,
         xaxis: {
             nticks: 13, 
             tickmode: 'auto'},
-        yaxis: {title: 'Stock Price (USD)'},
+        
+        yaxis: {
+            title: 'Stock Price (USD)',
+            nticks: 4,
+            tickmode: 'auto'
+        },
 
         // Vertical line for first case of COVID date.
         shapes: [
@@ -145,22 +150,20 @@ function generateGroupBarChart(selection) {
                 }
         });
     }
+
+// Creates the Gains and Losses chart for a chosen stock.
 function fetchDataAndCreateChart(selectSymbol) {
     // URL to JSON data on GitHub
     selectSymbol = selectSymbol.toLowerCase(); //SAM EDIT
-        let dataURL = `http://127.0.0.1:5000/api/data/${selectSymbol}`;
+    let dataURL = `http://127.0.0.1:5000/api/data/${selectSymbol}`;
 
     d3.json(dataURL).then(response => {
 
         dates= [];
-        // highs = [];
-        // lows = []; 
         gainsandlosses = [];
 
         for (let i = 0; i < response.length; i++) {
             dates.push(response[i]['date'])
-            // highs.push(response[i]['high'])
-            // lows.push(response[i]['low'])
             let change = response[i]['close'] - response[i]['open'];
             gainsandlosses.push(change);
 
@@ -169,37 +172,57 @@ function fetchDataAndCreateChart(selectSymbol) {
     new Chart(document.getElementById('bar-chart'), {
         type: 'bar',
         data: {
-            labels: dates,
+            // labels: dates,
+            // Prints every other date to the x-axis.
+            labels: dates.map((element, index) => index % 3 === 0 ? element: ''),
             datasets: [
                 {
-                    label: 'Gain/Loss',
+                    label: 'Gains and Losses (USD)',
                     data: gainsandlosses,
-                    backgroundColor: gainsandlosses.map(value => (value >= 0 ? 'green' : 'red'))
+                    backgroundColor: gainsandlosses.map(value => (value >= 0 ? 'green' : 'red')),
+                    barPercentage: 1.0                    
                 }
-            ]
+            ],
+            
         },
         options: {
-            responsive: true,
+            // Disables hover-over events.
+            events: [],
+            maintainAspectRatio: false,
+            responsive: false,
             title: {
                 display: true,
-                text: 'Gains and Losses Over Time'
+                text: `${getStockName(selectSymbol)} (${selectSymbol.toUpperCase()}) Daily Stock Gains and Losses`
             },
             scales: {
-                xAxis: {
+                x: {
                     title: {
                         display: true,
                         text: 'Date'
-                    }
+                    },
                 },
-                yAxis: {
+                y: {
                     title: {
                         display: true,
-                        text: 'Gain/Loss'
-                    }
+                        text: 'Daily Gain/Loss (USD)'
+                    },
                 }
+                
             }
         }
     });
     });
 }
 fetchDataAndCreateChart('wfc');
+
+function getStockName(symbol) {
+    // Loop through meta object by sector.
+    keys = Object.keys(meta);
+    for (let i = 0; i < keys.length; i++) {
+        let arr = meta[keys[i]];
+        // Loop through all stocks in a sector.
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j]['symbol'] == symbol) return arr[j]['name'];
+        }
+    }
+}

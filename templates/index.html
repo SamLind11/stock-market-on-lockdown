@@ -9,6 +9,7 @@
 <body>
     <h1>Stock Market on Lockdown</h1>
     
+    <h2>Industry Stocks Over a Year (10/1/19 to 10/1/20)</h2>
     <!--User selects sector to view.-->
     <select name="sector" id="sector" onchange="generateLineGraph(this.value)">
         <option value="finance" selected>Finance</option>
@@ -17,37 +18,40 @@
         <option value="retail">Retail</option>
     </select>
 
-    <div id="multiplot" width = 500 height="300"></div>
+    <!--Line chart-->
+    <div id="multiplot"></div>
 
     <!-- Dropdown list for stock symbols -->
     <label for="stockSymbol">Select a Stock Symbol:</label>
     <select onchange="fetchDataAndCreateChart(this.value)">
-        <option value="amzn">Amazon.com, Inc. (amzn)</option>
-        <option value="axp">American Express Company (axp)</option>
-        <option value="bac">Bank of America Corp (bac)</option>
-        <option value="goog">Alphabet Inc Class C (goog)</option>
-        <option value="hd">Home Depot Inc (hd)</option>
-        <option value="hsbc">HSBC Holdings plc (hsbc)</option>
-        <option value="jnj">Johnson & Johnson (jnj)</option>
-        <option value="lly">Eli Lilly And Co (lly)</option>
-        <option value="lulu">Lululemon Athletica Inc (lulu)</option>
-        <option value="mck">McKesson Corp (mck)</option>
-        <option value="meta">Meta Platforms Inc (meta)</option>
-        <option value="mrk">Merk & Co Inc (mrk)</option>
-        <option value="ms">Morgan Stanley (ms)</option>
-        <option value="mtch">Match Group Inc (mtch)</option>
-        <option value="snap">Snap Inc (snap)</option>
-        <option value="spotT">Spotify Technology SA (spot)</option>
-        <option value="tgt">Target Corp (tgt)</option>
-        <option value="unh">UnitedHealth Group Inc (unh)</option>
-        <option value="wfc" selected>Wells Fargo & Co (wfc)</option>
-        <option value="wsm">Williams-Sonoma Inc (wsm)</option>
+        <option value="amzn">Amazon.com, Inc. (AMZN)</option>
+        <option value="axp">American Express Company (AXP)</option>
+        <option value="bac">Bank of America Corp (BAC)</option>
+        <option value="goog">Alphabet Inc. Class C (GOOG)</option>
+        <option value="hd">Home Depot Inc. (HD)</option>
+        <option value="hsbc">HSBC Holdings plc (HSBC)</option>
+        <option value="jnj">Johnson & Johnson (JNJ)</option>
+        <option value="lly">Eli Lilly And Co. (LLY)</option>
+        <option value="lulu">Lululemon Athletica Inc. (LULU)</option>
+        <option value="mck">McKesson Corp (MCK)</option>
+        <option value="meta">Meta Platforms Inc. (META)</option>
+        <option value="mrk">Merk & Co Inc. (MRK)</option>
+        <option value="ms">Morgan Stanley (MS)</option>
+        <option value="mtch">Match Group Inc. (MTCH)</option>
+        <option value="snap">Snap Inc. (SNAP)</option>
+        <option value="spotT">Spotify Technology SA (SPOT)</option>
+        <option value="tgt">Target Corp (TGT)</option>
+        <option value="unh">UnitedHealth Group Inc. (UNH)</option>
+        <option value="wfc" selected>Wells Fargo & Co. (WFC)</option>
+        <option value="wsm">Williams-Sonoma Inc. (WSM)</option>
     </select>
 
-    <!-- Render the chart -->
-
-    <canvas id="bar-chart" width="500" height="300"></canvas>
-
+    <!-- Render the gains and losses chart -->
+    <div style="position: relative; left: 50px;">
+        <canvas id="bar-chart" width="1150" height="500"></canvas>
+    </div>
+    
+    
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     
     <script src="https://d3js.org/d3.v7.min.js"></script>
