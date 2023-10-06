@@ -22,9 +22,15 @@ session = Session(engine)
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
+# Create app #commented out below and added app = Flask(__name__) to see if it would fix the error
+app = Flask(__name__)
+CORS(app, supports_credentials=True)
+
 # Create routes
 @app.route("/")
 def home():
+    #added return 'homepage' below and commented out return render_template("index.html") to see if it would fix the error
+    # return 'homepage'
     return render_template("index.html")
 
 # Return data for a given stock in json format.
