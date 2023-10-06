@@ -114,10 +114,12 @@ function generateBarGraph(selection) {
                     highs.push(response[i]['high'])
                 }
                 // New code (calculate percent change)
-                
+                let oldValue= highs[0]
+                let newValue= highs[i]
+                let percentChange = ((newValue - oldValue) / oldValue) * 100;
 
                 // Create the trace for the data.
-                trace = {
+                var trace 1= {
                     x: dates,
                     y: highs,//************Change to percent change
                     type: "bar",
