@@ -11,17 +11,12 @@ function generateLineGraph(selection) {
         title: selection === 'finance' ? 'Finance Stocks':
                selection === 'socialMedia' ? 'Social Media Stocks':
                selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
-        width: 1480,
-        height: 400,
+        width: 1500,
+        height: 700,
         xaxis: {
             nticks: 13, 
             tickmode: 'auto'},
-        
-        yaxis: {
-            title: 'Stock Price (USD)',
-            nticks: 4,
-            tickmode: 'auto'
-        },
+        yaxis: {title: 'Stock Price (USD)'},
 
         // Vertical line for first case of COVID date.
         shapes: [
@@ -82,37 +77,61 @@ function generateLineGraph(selection) {
             Plotly.addTraces("multiplot", trace);
         });
     }
+    generateBarGraph(selection);
 }
 
 // Generate initial graph on page load.
 generateLineGraph('finance');
 
-//Create a grouped bar chart for average stock price by sector for three time periods.
-function generateGroupBarChart(selection) {
+//Create Percent Change Bar Chart
+function generateBarGraph(selection) {
     let userChoice = meta[selection];
 
     // Create initial graph.
-    let stockData = [];
-
-    layout = {
+    let layout = {
+        barmode: 'stack',
         title: selection === 'finance' ? 'Finance Stocks':
                selection === 'socialMedia' ? 'Social Media Stocks':
-               selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks'
-        };
-    
-        //Calculate the avearge values for each sector.
-        let sectorAverages = [];
+               selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
+        width: 1500,
+        height: 700
+    };
+    let data = [];
 
-        stockData.forEach(function(stock) {
-            if (!sectorAverages[stock.sector]) {
-                sectorAverages[stock.sector] = {
-                    total: 0,
-                    count: 0
+    for (let i = 0; i < userChoice.length; i++){
+        // Generate url.
+        let stockSymbol = userChoice[i].symbol; 
+        let stockName = userChoice[i].name;
+        let link = `http://127.0.0.1:5000/api/data/${stockSymbol}`;
+        console.log(link);
+        // Fetch json data from Flask API.
+        d3.json(link).then(response => {
+                
+                dates= [];
+                highs = [];
+                for (let i = 0; i < response.length; i++) {
+                    dates.push(response[i]['date'])
+                    highs.push(response[i]['high'])
+                }
+                // New code (calculate percent change)
+                
+
+                // Create the trace for the data.
+                trace = {
+                    x: dates,
+                    y: highs,//************Change to percent change
+                    type: "bar",
+                    name: `${stockName} (${stockSymbol.toUpperCase()})`,
+                    text: stockSymbol.toUpperCase()
                 };
-            }
-            sectorAverages[stock.sector].total += stock.value;
-            sectorAverages[stock.sector].count++;
+    
+                // Add the traces to the plot.
+                // Plotly.addTraces("bar", trace);
+                Plotly.newPlot("bar", [trace], layout);
+
         });
+    }
+}
 
         for(var sector in sectorAverages) {
             sectorAverages[sector].averag = sectorAverages[sector].total / sectorAverages[sector].count;
@@ -150,20 +169,22 @@ function generateGroupBarChart(selection) {
                 }
         });
     }
-
-// Creates the Gains and Losses chart for a chosen stock.
 function fetchDataAndCreateChart(selectSymbol) {
     // URL to JSON data on GitHub
     selectSymbol = selectSymbol.toLowerCase(); //SAM EDIT
-    let dataURL = `http://127.0.0.1:5000/api/data/${selectSymbol}`;
+        let dataURL = `http://127.0.0.1:5000/api/data/${selectSymbol}`;
 
     d3.json(dataURL).then(response => {
 
         dates= [];
+        // highs = [];
+        // lows = []; 
         gainsandlosses = [];
 
         for (let i = 0; i < response.length; i++) {
             dates.push(response[i]['date'])
+            // highs.push(response[i]['high'])
+            // lows.push(response[i]['low'])
             let change = response[i]['close'] - response[i]['open'];
             gainsandlosses.push(change);
 
@@ -172,57 +193,37 @@ function fetchDataAndCreateChart(selectSymbol) {
     new Chart(document.getElementById('bar-chart'), {
         type: 'bar',
         data: {
-            // labels: dates,
-            // Prints every other date to the x-axis.
-            labels: dates.map((element, index) => index % 3 === 0 ? element: ''),
+            labels: dates,
             datasets: [
                 {
-                    label: 'Gains and Losses (USD)',
+                    label: 'Gain/Loss',
                     data: gainsandlosses,
-                    backgroundColor: gainsandlosses.map(value => (value >= 0 ? 'green' : 'red')),
-                    barPercentage: 1.0                    
+                    backgroundColor: gainsandlosses.map(value => (value >= 0 ? 'green' : 'red'))
                 }
-            ],
-            
+            ]
         },
         options: {
-            // Disables hover-over events.
-            events: [],
-            maintainAspectRatio: false,
-            responsive: false,
+            responsive: true,
             title: {
                 display: true,
-                text: `${getStockName(selectSymbol)} (${selectSymbol.toUpperCase()}) Daily Stock Gains and Losses`
+                text: 'Gains and Losses Over Time'
             },
             scales: {
-                x: {
+                xAxis: {
                     title: {
                         display: true,
                         text: 'Date'
-                    },
+                    }
                 },
-                y: {
+                yAxis: {
                     title: {
                         display: true,
-                        text: 'Daily Gain/Loss (USD)'
-                    },
+                        text: 'Gain/Loss'
+                    }
                 }
-                
             }
         }
     });
     });
 }
 fetchDataAndCreateChart('wfc');
-
-function getStockName(symbol) {
-    // Loop through meta object by sector.
-    keys = Object.keys(meta);
-    for (let i = 0; i < keys.length; i++) {
-        let arr = meta[keys[i]];
-        // Loop through all stocks in a sector.
-        for (let j = 0; j < arr.length; j++) {
-            if (arr[j]['symbol'] == symbol) return arr[j]['name'];
-        }
-    }
-}
