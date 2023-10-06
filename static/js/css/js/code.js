@@ -130,5 +130,103 @@ function generateBarGraph(selection) {
                 Plotly.newPlot("bar", [trace], layout);
 
         });
+<<<<<<< HEAD:static/js/css/js/code.js
     }
 }
+=======
+
+        for(var sector in sectorAverages) {
+            sectorAverages[sector].averag = sectorAverages[sector].total / sectorAverages[sector].count;
+        }
+
+        //Create Greouped Bar Chart
+        var sectors = Object.keys(sectorAverages);
+        var averageValues = sectors.map(function(sector) {
+            return sectorAverages[sector].average;
+        });
+
+        var ctx = document.getElementById("grouped-bar-chart").getContext("2d");
+
+        var chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: sectors,
+                datasets: [
+                    {
+                        label: "Average Stock Value",
+                        data: averageValues,
+                        backgroundColor: "rgba(75, 192, 192, 0.2)", 
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+        });
+    }
+function fetchDataAndCreateChart(selectSymbol) {
+    // URL to JSON data on GitHub
+    selectSymbol = selectSymbol.toLowerCase(); //SAM EDIT
+        let dataURL = `http://127.0.0.1:5000/api/data/${selectSymbol}`;
+
+    d3.json(dataURL).then(response => {
+
+        dates= [];
+        // highs = [];
+        // lows = []; 
+        gainsandlosses = [];
+
+        for (let i = 0; i < response.length; i++) {
+            dates.push(response[i]['date'])
+            // highs.push(response[i]['high'])
+            // lows.push(response[i]['low'])
+            let change = response[i]['close'] - response[i]['open'];
+            gainsandlosses.push(change);
+
+        }
+            //Create chart instance
+    new Chart(document.getElementById('bar-chart'), {
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: 'Gain/Loss',
+                    data: gainsandlosses,
+                    backgroundColor: gainsandlosses.map(value => (value >= 0 ? 'green' : 'red'))
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Gains and Losses Over Time'
+            },
+            scales: {
+                xAxis: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        display: true,
+                        text: 'Gain/Loss'
+                    }
+                }
+            }
+        }
+    });
+    });
+}
+fetchDataAndCreateChart('wfc');
+>>>>>>> main:static/js/code.js
