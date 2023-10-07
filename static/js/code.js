@@ -127,8 +127,9 @@ async function generateBarGraph(selection) {
             x: [stockName],
             y: [firstDateRangePercentChange],
             type: "bar",
-            name: `${stockSymbol.toUpperCase()} - 10/1/19 to 3/24/20`,
-            text: ['${firstDateRangePercentChange.toFixed(2)}%'],
+            name: `Percent Change from 10/1/19 to 3/24/20`,
+            legendgroup: 'group1',
+            text: ['% change from Oct to March'],
             marker: {
                 color: 'rgb(31, 119, 180)'
             }
@@ -138,8 +139,9 @@ async function generateBarGraph(selection) {
             x: [stockName],
             y: [secondDateRangePercentChange],
             type: "bar",
-            name: `${stockSymbol.toUpperCase()} - 10/1/19 to 7/16/20`,
-            text: ['${secondDateRangePercentChange.toFixed(2)}%'],
+            name: `Percent Change from 10/1/19 to 7/16/20`,
+            legendgroup: 'group2',
+            text: ['% change from Oct to July'],
             marker: {
                 color: 'rgb(255, 127, 14)'
             }
@@ -149,10 +151,13 @@ async function generateBarGraph(selection) {
         data.push(firstTrace, secondTrace);
     }
 
-    Plotly.newPlot("percentChange", data, layout);
+    Plotly.newPlot("percentChangeGraph", data, layout);
 }
 
 generateBarGraph('finance');
+
+
+
 
 //Create Gains and Losses Graph
 function fetchDataAndCreateChart(selectSymbol) {

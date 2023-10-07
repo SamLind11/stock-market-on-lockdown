@@ -8,10 +8,6 @@
 </head>
 <body>
     <h1>Stock Market on Lockdown</h1>
-    <!-- Lori's test code -->
-    <div id="percentChange"></div>
-    <!-- Lori's test code -->
-    <h2>Industry Stocks Over a Year (10/1/19 to 10/1/20)</h2>
     <!--User selects sector to view.-->
     <select name="sector" id="sector" onchange="generateLineGraph(this.value)">
         <option value="finance" selected>Finance</option>
@@ -51,6 +47,22 @@
     <!-- Render the chart-->
 
     <canvas id="bar-chart" width="500" height="300"></canvas>
+ 
+    <!-- Lori's test code -->
+    <h2>Industry Stocks Over a Year (10/1/19 to 10/1/20)</h2>
+ 
+    <!--Dropdown for selecting sectors for the percentChange graph-->
+    <label for=""sectorSelection">Select Sector for Percent Change:</label>
+    <select id="sectorSelection" onchange="updatePercentChangeGraph()">
+        <option value="finance" selected>Finance</option>
+        <option value="socialMedia">Social Media</option>
+        <option value="healthcare">Healthcare</option>
+        <option value="retail">Retail</option>
+    </select>"
+    
+    <!-- Lori's test code -->
+     <div id="percentChangeGraph"></div>
+
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
