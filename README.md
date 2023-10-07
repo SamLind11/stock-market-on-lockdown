@@ -27,7 +27,7 @@ To interact with and view the project's visuals, please follow these steps:
 
 1. Clone this repository to your local machine using the following command in your terminal or command prompt:
    ```
-   git clone <repository-url>
+   https://github.com/SamLind11/stock-market-on-lockdown.git
    ```
 
 2. Ensure that you have the following programs installed on your machine:
