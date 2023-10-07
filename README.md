@@ -56,7 +56,7 @@ Before continuing, make sure you have the following programs installed on your m
 
 After completing the installation steps and navigating to the repository folder, follow these steps to view and interact with the project:
 
-1. Right-click on the HTML file and choose the option to open it in Google Chrome. This will take you to the project's webpage, where you can both view and interact with the data.
+1. You can use Visual Studio in order to view the folder.
 
 ## Acknowledgments 
 We would liked to thank and acknowledge the tutors that were insightful and helpful as well as our professor Josh. We hope you find this project just as interesting as we did.
