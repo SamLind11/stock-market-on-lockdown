@@ -1,7 +1,3 @@
-Thank you for providing the README file. I'll help you improve it by including installation instructions. Here's an updated version of your README with installation steps:
-
----
-
 # stock-market-on-lockdown
 
 This project was created for the UNC Data Analytics Bootcamp.
@@ -38,7 +34,7 @@ To interact with and view the project's visuals, please follow these steps:
    - Python Flask API
    - HTML/CSS
 
-## Prerequisites
+## Prerequisites/Installations
 
 Before continuing, make sure you have the following programs installed on your machine:
 
@@ -54,13 +50,7 @@ Before continuing, make sure you have the following programs installed on your m
 
 - **HTML/CSS**: No installation is required for HTML/CSS, as they are standard web technologies.
 
-## Installation
 
-1. Download and install [DB Browser](https://sqlitebrowser.org/dl/) based on your operating system.
-
-2. Clone this repository to your local machine using the command mentioned in the "Getting Started" section.
-
-3. Open Visual Studio Code, and use it to navigate to the cloned repository folder. This will allow you to access the HTML file and API.
 
 ## Usage
 
@@ -68,6 +58,6 @@ After completing the installation steps and navigating to the repository folder,
 
 1. Right-click on the HTML file and choose the option to open it in Google Chrome. This will take you to the project's webpage, where you can both view and interact with the data.
 
----
+## Acknowledgments to tutors
 
 This updated README file provides clear instructions on how to install the required software and set up the project for usage. Make sure to replace `<repository-url>` in the "Getting Started" section with the actual URL of your GitHub repository.
