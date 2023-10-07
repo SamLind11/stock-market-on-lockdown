@@ -59,5 +59,3 @@ After completing the installation steps and navigating to the repository folder,
 1. Right-click on the HTML file and choose the option to open it in Google Chrome. This will take you to the project's webpage, where you can both view and interact with the data.
 
 ## Acknowledgments to tutors
-
-This updated README file provides clear instructions on how to install the required software and set up the project for usage. Make sure to replace `<repository-url>` in the "Getting Started" section with the actual URL of your GitHub repository.
