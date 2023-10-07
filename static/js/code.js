@@ -82,30 +82,145 @@ function generateLineGraph(selection) {
 // Generate initial graph on page load.
 generateLineGraph('finance');
 
-// //Create Percent Change Bar Chart
-// function generateBarGraph(selection) {
-//     let userChoice = meta[selection];
+//Create Percent Change Bar Chart
+async function generateBarGraph(selection) {
+    let userChoice = meta[selection];
+    //  const link = `http://127.0.0.1:5000/api/data/${stockSymbol}`;
+    //  const response = await d3.json(link);
+    //     console.log(response);
 
-//     // Create initial graph.
-//     let layout = {
-//         barmode: 'stack',
-//         title: selection === 'finance' ? 'Finance Stocks':
-//                selection === 'socialMedia' ? 'Social Media Stocks':
-//                selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
-//         width: 1500,
-//         height: 700
-//     };
-//     let data = [];
+    // Create initial graph.
+    let layout = {
+        barmode: 'group',
+        title: selection === 'finance' ? 'Finance Stocks':
+               selection === 'socialMedia' ? 'Social Media Stocks':
+               selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
+        width: 1500,
+        height: 700
+    };
+    let data = [];
 
-//     for (let i = 0; i < userChoice.length; i++){
-//         // Generate url.
-//         let stockSymbol = userChoice[i].symbol; 
-//         let stockName = userChoice[i].name;
-//         let link = `http://127.0.0.1:5000/api/data/${stockSymbol}`;
-//         console.log(link);
-//         // Fetch json data from Flask API.
-//         d3.json(link).then(response => {
-                
+    // var trace1 = {
+    //     x: ['giraffes', 'orangutans', 'monkeys'],
+    //     y: [20, 14, 23],
+    //     name: 'SF Zoo',
+    //     type: 'bar'
+    //   };
+      
+    //   var trace2 = {
+    //     x: ['giraffes', 'orangutans', 'monkeys'],
+    //     y: [12, 18, 29],
+    //     name: 'LA Zoo',
+    //     type: 'bar'
+    //   };
+      
+    //   var data = [trace1, trace2];
+      
+    //   var layout = {barmode: 'group'};
+   //chatGPT suggests commenting out next line   
+    //   Plotly.newPlot('percentChange', data, layout);
+    //Fetch data from Flask API  
+    for (let i = 0; i < userChoice.length; i++){
+        // Generate url.
+        let stockSymbol = userChoice[i].symbol; 
+        let stockName = userChoice[i].name;
+        let link = `http://127.0.0.1:5000/api/data/${stockSymbol}`;
+    
+        // Fetch json data from Flask API.(add ; to end of line 130)
+        const response = await d3.json(link);
+        console.log(response);
+        
+        //Filter data for the first date range (10/1/19 to 3/24/20).. chatGPT #2 suggestions
+        // let firstDateRangeData = response.filter(d => {
+        //     let date = new Date(d.date);
+        //     let startDate = new Date('10/1/19');
+        //     let endDate = new Date('3/24/20');
+        //     return date >= startDate && date <= endDate;
+        // });
+        let firstDateRangeData = response.find(d => d.date === '10/1/19') || {high: 0};
+        let firstDateRangeHigh = response.find(d => d.date === '3/24/20').high;
+        
+        //Calculate percent change for the first date range. chatGPT suggests adding next 7 lines (and re-did after #2 and again after #4)
+        // let firstDateRangePercentChanges = firstDateRangeData.map(d => {
+        //    let oldValue= firstDateRangeData[0].high;
+        //    let newValue= d.high
+        //    return ((newValue - oldValue) / oldValue) * 100;
+        // });
+        let firstDateRangePercentChange = ((firstDateRangeHigh - firstDateRangeData.high) / firstDateRangeData.high) * 100;
+
+        //Filter data for the second date range (10/1/19 to 7/16/20)
+        // let secondDateRangeData = response.filter(d => {
+        //     let date = new Date(d.date);
+        //     let startDate = new Date('10/1/19');
+        //     let endDate = new Date('7/16/20');
+        //     return date >= startDate && date <= endDate;
+        // });
+        let secondDateRangeData = response.find(d => d.date === '10/1/19') || {high: 0};
+        let secondDateRangeHigh = response.find(d => d.date === '7/16/20').high;
+
+        //Calculate percent change for the second date range.
+        // let secondDateRangePercentChanges = secondDateRangeData.map(d => {
+        //       let oldValue= secondDateRangeData[0].high;
+        //       let newValue= d.high;
+        //       let stockPercentChange = ((newValue - oldValue) / oldValue) * 100;
+        //       return ((newValue - oldValue) / oldValue) * 100;
+        //   });
+        let secondDateRangePercentChange = ((secondDateRangeHigh - secondDateRangeData.high) / secondDateRangeData.high) * 100;
+
+        // Create traces for the two date ranges. ChatGPT suggestions for the 
+        // let trace1 = {
+        //     x: firstDateRangeData.map(d => d.date),
+        //     y: firstDateRangePercentChanges,
+        //     type: "bar",
+        //     name: `${stockName} (${stockSymbol.toUpperCase()}) - 10/1/19 to 3/24/20`,
+        //     text: firstDateRangeData.map(d => d.high),
+        // };
+        let firstTrace = {
+            x: [stockName],
+            y: [firstDateRangePercentChange],
+            type: "bar",
+            name: `${stockSymbol.toUpperCase()} - 10/1/19 to 3/24/20`,
+            text: ['${firstDateRangePercentChange.toFixed(2)}%'],
+            marker: {
+                color: 'rgb(31, 119, 180)'
+            }
+        };
+
+        let secondTrace = {
+            x: [stockName],
+            y: [secondDateRangePercentChange],
+            type: "bar",
+            name: `${stockSymbol.toUpperCase()} - 10/1/19 to 7/16/20`,
+            text: ['${secondDateRangePercentChange.toFixed(2)}%'],
+            marker: {
+                color: 'rgb(255, 127, 14)'
+            }
+        };
+        // let trace2 = {
+        //     x: secondDateRangeData.map(d => d.date),
+        //     y: secondDateRangePercentChanges,
+        //     type: "bar",
+        //     name: `${stockName} (${stockSymbol.toUpperCase()}) - 10/1/19 to 7/16/20`,
+        //     text: secondDateRangeData.map(d => d.high),
+        // };
+
+        // Add the trace to the plot. ChatGPT suggestions (until line 158)
+        // data.push(trace1, trace2);
+        data.push(firstTrace, secondTrace);
+    }
+
+    // Plotly.newPlot("percentChange", [].concat(...data), layout);
+// }
+    Plotly.newPlot("percentChange", data, layout);
+}
+
+generateBarGraph('finance');
+
+//ChatGPT suggests commenting out next lines until line 191
+//         const midpointIndex = response.findIndex(d => d.date === '3/24/20');
+//         // const firsthalf = response.slice(0, midpointIndex+1);
+//         const midChange = response[midpointIndex].high - response[0].high;
+//         console.log(midChange);        
 //                 dates= [];
 //                 highs = [];
 //                 for (let i = 0; i < response.length; i++) {
@@ -113,24 +228,26 @@ generateLineGraph('finance');
 //                     highs.push(response[i]['high'])
 //                 }
 //                 // New code (calculate percent change)
-                
+//                 let oldValue= highs[0]
+//                 let newValue= highs[i]
+//                 let stockPercentChange = ((newValue - oldValue) / oldValue) * 100;
 
 //                 // Create the trace for the data.
-//                 trace = {
+//                 var trace= {
 //                     x: dates,
-//                     y: highs,//************Change to percent change
+//                     y: stockPercentChange,
 //                     type: "bar",
 //                     name: `${stockName} (${stockSymbol.toUpperCase()})`,
 //                     text: stockSymbol.toUpperCase()
 //                 };
     
 //                 // Add the traces to the plot.
-//                 // Plotly.addTraces("bar", trace);
-//                 Plotly.newPlot("bar", [trace], layout);
+//                 Plotly.addTraces("percentChange", trace);
+//                 // Plotly.newPlot("percentChange", [trace1], layout);
 
-//         });
 //     }
 // }
+// generateBarGraph('finance');
 
 //         for(var sector in sectorAverages) {
 //             sectorAverages[sector].averag = sectorAverages[sector].total / sectorAverages[sector].count;
