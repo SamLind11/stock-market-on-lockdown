@@ -75,4 +75,4 @@ def byDate(date):
     return jsonify(data_list)
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
