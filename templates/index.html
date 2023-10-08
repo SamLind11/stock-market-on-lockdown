@@ -50,10 +50,10 @@
  
     <!-- Lori's test code -->
     <h2>Industry Stocks Over a Year (10/1/19 to 10/1/20)</h2>
- 
+    
     <!--Dropdown for selecting sectors for the percentChange graph-->
-    <label for=""sectorSelection">Select Sector for Percent Change:</label>
-    <select id="sectorSelection" onchange="updatePercentChangeGraph()">
+    <label for="sectorSelection">Select Sector for Percent Change:</label>
+    <select id="sectorSelection" onchange="updatePercentChangeGraph(this.value)">
         <option value="finance" selected>Finance</option>
         <option value="socialMedia">Social Media</option>
         <option value="healthcare">Healthcare</option>

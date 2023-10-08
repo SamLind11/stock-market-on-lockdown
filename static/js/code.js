@@ -82,26 +82,27 @@ function generateLineGraph(selection) {
 // Generate initial graph on page load.
 generateLineGraph('finance');
 
+
+//Create Percent Change Bar Chart
+//Function to update the percent change graph based on the selected sector
+async function updatePercentChangeGraph() {
+    // Get the selected sector from the dropdown
+    let selectedSector = document.getElementById("sectorSelection").value;
+
+    //Call the generateBarGraph function with the selected sector
+    await generateBarGraph(selectedSector);
+}
+
 //Create Percent Change Bar Chart
 async function generateBarGraph(selection) {
     let userChoice = meta[selection];
-
-    // Create initial graph.
-    let layout = {
-        barmode: 'group',
-        title: selection === 'finance' ? 'Finance Stocks':
-               selection === 'socialMedia' ? 'Social Media Stocks':
-               selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
-        width: 1500,
-        height: 700
-    };
     let data = [];
 
     //Fetch data from Flask API  
-    for (let i = 0; i < userChoice.length; i++){
+    for (let j = 0; j < userChoice.length; j++){
         // Generate url.
-        let stockSymbol = userChoice[i].symbol; 
-        let stockName = userChoice[i].name;
+        let stockSymbol = userChoice[j].symbol; 
+        let stockName = userChoice[j].name;
         let link = `http://127.0.0.1:5000/api/data/${stockSymbol}`;
     
         // Fetch json data from Flask API.(add ; to end of line 130)
@@ -147,14 +148,29 @@ async function generateBarGraph(selection) {
             }
         };
        
-        // Add the traces to the plot.
+        // Add the traces to the data array
         data.push(firstTrace, secondTrace);
     }
 
-    Plotly.newPlot("percentChangeGraph", data, layout);
-}
+    //Clear existing data and layout
+    Plotly.purge("percentChangeGraph");
 
-generateBarGraph('finance');
+    //Create the new graph based on the selection
+    let layout = {
+        barmode: 'group',
+        title: selection === 'finance' ? 'Finance Stocks':
+               selection === 'socialMedia' ? 'Social Media Stocks':
+               selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
+        width: 1500,
+        height: 700
+    };
+
+    //Create the new graph with updated data and layout
+    Plotly.newPlot("percentChangeGraph", data, layout);
+}  
+
+// Call the updatePercentChangeGraph function when the page loads to initialize the graph
+updatePercentChangeGraph();
 
 
 
