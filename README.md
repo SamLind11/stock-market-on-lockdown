@@ -50,15 +50,16 @@ Before you begin, ensure that you have the required software and tools installed
 
 ## Visuals
 ![Finance Graph](Visuals/Graph.png)
-*Caption: Finance Stocks Over A Year.*
+*This graph displays the stock market's performance leading up to and during the COVID-19 pandemic lockdown.*
 
 ![Interactive Graph](Visuals/linegraph.gif)
-*Caption: Interactive Line Graph.*
+*An interactive line graph that allows users to explore stock market trends over time.*
 
 ![Interactive Graph 2](Visuals/bar.gif)
-*Caption: Interactive Bar graph.*
+*An additional interactive graph that offers an alternative perspective on stock market data before and during the lockdown.*
 
-Note: All visuals are on the webpage, these are just some of our graphs.
+
+Note: All visuals can be viewed and interacted with on the webpage, these are just some of our graphs to give an idea.
 ## Usage
 
 After completing the installation steps and navigating to the repository folder, follow these steps to view and interact with the project:
