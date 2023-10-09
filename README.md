@@ -50,6 +50,10 @@ Before continuing, make sure you have the following programs installed on your m
 
 - **HTML/CSS**: No installation is required for HTML/CSS, as they are standard web technologies.
 
+- **Flask Core: In your terminal/bash type: pip install flask_core if not installed already
+
+## Visuals
+![Finance Graph](/Users/hazelmena/Desktop/newplot.png)
 
 
 ## Usage
@@ -57,6 +61,10 @@ Before continuing, make sure you have the following programs installed on your m
 After completing the installation steps and navigating to the repository folder, follow these steps to view and interact with the project:
 
 1. You can use Visual Studio in order to view the folder.
+2. Locate to your terminal/bash
+3. Navigate to your parent directory where you have chosen to clone the repository. (cd)
+4. Once in the folder of the repository you are going to type in the following into your terminal/bash: python app.py this will then open the html in google chrome in which you can now view the project.
+5. Once on the html you will be able to see our graphs and interact with them. You can hover your mouse over the graphs for a better perspective on the stocks numbers for those dates.
 
 ## Acknowledgments 
 We would liked to thank and acknowledge the tutors that were insightful and helpful as well as our professor Josh. We hope you find this project just as interesting as we did.
