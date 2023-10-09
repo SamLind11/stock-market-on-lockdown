@@ -50,7 +50,7 @@ Before continuing, make sure you have the following programs installed on your m
 
 - **HTML/CSS**: No installation is required for HTML/CSS, as they are standard web technologies.
 
-- **Flask Core: In your terminal/bash type: pip install flask_core if not installed already
+- **Flask Core**: In your terminal/bash type: pip install flask_core if not installed already
 
 ## Visuals
 ![Finance Graph](Visuals/Graph.png)
