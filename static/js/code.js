@@ -83,6 +83,7 @@ function generateLineGraph(selection) {
 generateLineGraph('finance');
 
 
+
 //Create Percent Change Bar Chart
 //Function to update the percent change graph based on the selected sector
 async function updatePercentChangeGraph() {
@@ -148,6 +149,8 @@ async function generateBarGraph(selection) {
             }
         };
        
+ 
+
         // Add the traces to the data array
         data.push(firstTrace, secondTrace);
     }
