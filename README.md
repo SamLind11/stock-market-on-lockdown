@@ -53,9 +53,11 @@ Before you begin, ensure that you have the required software and tools installed
 *This graph displays the stock market's performance leading up to and during the COVID-19 pandemic lockdown.*
 
 ![Interactive Graph](Visuals/linegraph.gif)
+
 *An interactive line graph that allows users to explore stock market trends over time.*
 
 ![Interactive Graph 2](Visuals/bar.gif)
+
 *An additional interactive graph that offers an alternative perspective on stock market data before and during the lockdown.*
 
 
