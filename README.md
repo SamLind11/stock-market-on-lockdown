@@ -54,7 +54,9 @@ Before continuing, make sure you have the following programs installed on your m
 
 ## Visuals
 ![Finance Graph](Visuals/Graph.png)
-![Healthcare](Visuals/linegraph.gif)
+![Interactive Graph](Visuals/linegraph.gif)
+![Interactive Graph 2](Visuals/bar.gif)
+
 
 
 
