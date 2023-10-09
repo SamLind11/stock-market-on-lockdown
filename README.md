@@ -53,7 +53,7 @@ Before continuing, make sure you have the following programs installed on your m
 - **Flask Core: In your terminal/bash type: pip install flask_core if not installed already
 
 ## Visuals
-![Finance Graph](/Users/hazelmena/Desktop/newplot.png)
+![Finance Graph](/Users/hazelmena/Desktop/Homework/stock-market-on-lockdown/Visuals/Graph.png)
 
 
 ## Usage
