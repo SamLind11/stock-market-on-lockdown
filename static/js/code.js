@@ -61,9 +61,15 @@ function generateLineGraph(selection) {
             dates= [];
             highs = [];
             for (let i = 0; i < response.length; i++) {
-                dates.push(response[i]['date'])
+                // Convert date values for the 'pins' stock.
+                if (stockSymbol == 'pins') {
+                    dates.push(processPinsDate(response[i]['date']));
+                } else {
+                    dates.push(response[i]['date']);
+                }
                 highs.push(response[i]['high'])
             }
+            if (stockSymbol == 'pins') console.log(dates);
             // Create the trace for the data.
             trace = {
                 x: dates,
@@ -180,6 +186,18 @@ updatePercentChangeGraph();
 
 //Create Gains and Losses Graph
 function fetchDataAndCreateChart(selectSymbol) {
+    // Get stock name from metadata.js.
+    keys = Object.keys(meta);
+    let stockName = "";
+    for (let i = 0; i < keys.length; i++) {
+        sector = meta[keys[i]];
+        for (let j = 0; j < sector.length; j++) {
+            if (sector[j]['symbol'] == selectSymbol.toLowerCase()) {
+                stockName = sector[j]['name'];
+            }
+        }
+    }
+
     // URL to JSON data on GitHub
     selectSymbol = selectSymbol.toLowerCase(); //SAM EDIT
         let dataURL = `http://127.0.0.1:5000/api/data/${selectSymbol}`;
@@ -206,17 +224,18 @@ function fetchDataAndCreateChart(selectSymbol) {
             labels: dates,
             datasets: [
                 {
-                    label: 'Gain/Loss',
+                    label: 'Daily Gain/Loss in USD',
                     data: gainsandlosses,
                     backgroundColor: gainsandlosses.map(value => (value >= 0 ? 'green' : 'red'))
                 }
             ]
         },
         options: {
-            responsive: true,
+            events: [],
+            responsive: false,
             title: {
                 display: true,
-                text: 'Gains and Losses Over Time'
+                text: `Daily Stock Gains/Losses for ${stockName} (${selectSymbol.toUpperCase()})`
             },
             scales: {
                 xAxis: {
@@ -237,3 +256,13 @@ function fetchDataAndCreateChart(selectSymbol) {
     });
 }
 fetchDataAndCreateChart('wfc');
+
+// Function which converts date strings for the 'pins' stock.
+function processPinsDate(date) {
+    let d = date.split("/");
+    let month = parseInt(d[0], 10);
+    let day = parseInt(d[1], 10);
+    let year = d[2].slice(2,4);
+    console.log(`${month}/${day}/${year}`);
+    return `${month}/${day}/${year}`;
+}

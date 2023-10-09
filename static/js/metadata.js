@@ -60,7 +60,7 @@ meta = {
         symbol: 'spot',
         name: 'Spotify'
     }, {
-        symbol: 'mtch',
-        name: 'Match Group Inc.'
+        symbol: 'pins',
+        name: 'Pinterest Inc.'
     }]
 }
