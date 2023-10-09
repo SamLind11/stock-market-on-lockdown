@@ -8,6 +8,8 @@
 </head>
 <body>
     <h1>Stock Market on Lockdown</h1>
+
+    <h2>Stock Trends From 10/1/2019 to 10/1/2020</h2>
     <!--User selects sector to view.-->
     <select name="sector" id="sector" onchange="generateLineGraph(this.value)">
         <option value="finance" selected>Finance</option>
@@ -19,6 +21,7 @@
     <!--Line chart-->
     <div id="multiplot"></div>
 
+    <h2>Daily Stock Gains/Losses By Company</h2>
     <!-- Dropdown list for stock symbols -->
     <label for="stockSymbol">Select a Stock Symbol:</label>
     <select onchange="fetchDataAndCreateChart(this.value)">
@@ -35,18 +38,20 @@
         <option value="meta">Meta Platforms Inc. (META)</option>
         <option value="mrk">Merk & Co Inc. (MRK)</option>
         <option value="ms">Morgan Stanley (MS)</option>
-        <option value="mtch">Match Group Inc. (MTCH)</option>
+        <option value="pins">Pinterest Inc. (PINS)</option>
         <option value="snap">Snap Inc. (SNAP)</option>
         <option value="spot">Spotify Technology SA (SPOT)</option>
         <option value="tgt">Target Corp (TGT)</option>
         <option value="unh">UnitedHealth Group Inc. (UNH)</option>
-        <option value="wfc">Wells Fargo & Co. (WFC)</option>
+        <option value="wfc" selected>Wells Fargo & Co. (WFC)</option>
         <option value="wsm">Williams-Sonoma Inc. (WSM)</option>
     </select>"
 
     <!-- Render the chart-->
-
-    <canvas id="bar-chart" width="500" height="300"></canvas>
+    <div style="margin-left: 30px;">
+        <canvas id="bar-chart" width="1200" height="500"></canvas>
+    </div>
+    
  
     <!-- Lori's test code -->
     <h2>Industry Stocks Over a Year (10/1/19 to 10/1/20)</h2>
