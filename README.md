@@ -1,20 +1,20 @@
-# stock-market-on-lockdown
+# Stock Market on Lockdown
 
 This project was created for the UNC Data Analytics Bootcamp.
 
 ## Authors
-- Lori Girton ([GitHub](https://github.com/LoriGirton))
-- Sam Lind ([GitHub](https://github.com/SamLind11))
-- Kaijay Gregory ([GitHub](https://github.com/kaijaygregory))
-- Hazel Mena ([GitHub](https://github.com/hazelmena))
+- [Lori Girton](https://github.com/LoriGirton)
+- [Sam Lind](https://github.com/SamLind11)
+- [Kaijay Gregory](https://github.com/kaijaygregory)
+- [Hazel Mena](https://github.com/hazelmena)
 
 ## PowerPoint Presentation
-We have prepared a PowerPoint presentation titled "Stock Market on Lockdown" that provides additional insights into this project.
+We have prepared a Google Slides presentation titled "Stock Market on Lockdown" that provides additional insights into this project.
 
-- [View PowerPoint Presentation](https://docs.google.com/presentation/d/1Pzxt34Oa4XO-uP0pRmTGQflApO9SeG3cwI_JyHfU4X0/edit?usp=sharing)
+- [View Google Slides Presentation](https://docs.google.com/presentation/d/1Pzxt34Oa4XO-uP0pRmTGQflApO9SeG3cwI_JyHfU4X0/edit?usp=sharing)
 
 
-The purpose of this project is to analyze the impact of the COVID-19 pandemic on the stock market by utilizing data from 20 different stocks across four distinct categories. The dataset encompasses months leading up to the lockdown, offering a visual representation of the market's transformation from pre-lockdown "normality" to its subsequent state during the pandemic.
+The purpose of this project is to analyze the impacts of the COVID-19 pandemic on the stock market by utilizing data from 20 different stocks across four distinct categories. The dataset encompasses months leading up to and during the initial pandemic lockdowns, offering a visual representation of the market's transformation from pre-lockdown "normality" to its subsequent state during the pandemic.
 
 ## Table of Contents
 - [Getting Started](#getting-started)
@@ -56,18 +56,20 @@ Before you begin, ensure that you have the required software and tools installed
 
 ## Visuals
 ![Finance Graph](Visuals/Graph.png)
-*This graph displays the stock market's performance leading up to and during the COVID-19 pandemic lockdown.*
 
 ![Interactive Graph](Visuals/linegraph.gif)
 
-*An interactive line graph that allows users to explore stock market trends over time.*
+*Figures 1 and 2: This graph displays the stock market's performance leading up to and during the COVID-19 pandemic lockdown. Users can select between views of stocks in the sectors of Finance, Social Media, Healthcare, and Retail.*
+
+![barchartcap](https://github.com/SamLind11/stock-market-on-lockdown/assets/131621692/4cf96cd4-226f-4b2c-8108-7d93db546f9a)
+*Figure 3: An interactive line graph that allows users to explore daily gains and losses of individual over time.  Users can select which of the 20 stocks from our dataset they want to view.*
 
 ![Interactive Graph 2](Visuals/bar.gif)
 
-*An additional interactive graph that offers an alternative perspective on stock market data before and during the lockdown.*
+*Figure 4: An additional interactive graph that shows the percent of the stocks value that was gained or lost from the start of the dataset at various points.*
 
 
-Note: All visuals can be viewed and interacted with on the webpage, these are just some of our graphs to give an idea.
+Note: All visuals can be viewed and interacted with on the webpage.
 ## Usage
 
 After completing the installation steps and navigating to the repository folder, follow these steps to view and interact with the project:
@@ -82,5 +84,3 @@ After completing the installation steps and navigating to the repository folder,
 We would like to thank our tutors for their insightful guidance and support throughout this project. Special thanks to our professor, Josh, for his valuable input. We hope you find this project as interesting as we did.
 
 
-## Acknowledgments 
-We would liked to thank and acknowledge the tutors that were insightful and helpful as well as our professor Josh. We hope you find this project just as interesting as we did.
