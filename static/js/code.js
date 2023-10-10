@@ -62,14 +62,14 @@ function generateLineGraph(selection) {
             highs = [];
             for (let i = 0; i < response.length; i++) {
                 // Convert date values for the 'pins' stock.
-                if (stockSymbol == 'pins') {
+                if (stockSymbol === 'pins') {
                     dates.push(processPinsDate(response[i]['date']));
                 } else {
                     dates.push(response[i]['date']);
                 }
                 highs.push(response[i]['high'])
             }
-            if (stockSymbol == 'pins') console.log(dates);
+            if (stockSymbol === 'pins') console.log(dates);
             // Create the trace for the data.
             trace = {
                 x: dates,
@@ -118,14 +118,14 @@ async function generateBarGraph(selection) {
         
         //Filter data for the first date range (10/1/19 to 3/24/20)
         let firstDateRangeData = response.find(d => d.date === '10/1/19') || {high: 0};
-        let firstDateRangeHigh = response.find(d => d.date === '3/24/20').high;
+        let firstDateRangeHigh = response.find(d => d.date === '3/24/20')?.high || 0;
         
         //Calculate percent change for the first date range. 
         let firstDateRangePercentChange = ((firstDateRangeHigh - firstDateRangeData.high) / firstDateRangeData.high) * 100;
 
         //Filter data for the second date range (10/1/19 to 7/16/20)
         let secondDateRangeData = response.find(d => d.date === '10/1/19') || {high: 0};
-        let secondDateRangeHigh = response.find(d => d.date === '7/16/20').high;
+        let secondDateRangeHigh = response.find(d => d.date === '7/16/20')?.high || 0;
 
         //Calculate percent change for the second date range.
         let secondDateRangePercentChange = ((secondDateRangeHigh - secondDateRangeData.high) / secondDateRangeData.high) * 100;
