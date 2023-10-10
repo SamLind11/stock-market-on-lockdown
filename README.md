@@ -5,7 +5,7 @@ This project was created for the UNC Data Analytics Bootcamp.
 ## Authors
 - [Lori Girton](https://github.com/LoriGirton)
 - [Sam Lind](https://github.com/SamLind11)
-- [Kaijay Gregory](https://github.com/kaijaygregory)
+- [Kaija Gregory](https://github.com/kaijaygregory)
 - [Hazel Mena](https://github.com/hazelmena)
 
 ## PowerPoint Presentation
