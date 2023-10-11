@@ -4,75 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Market on Lockdown</title>
-    
+    <link href="../static/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Stock Market on Lockdown</h1>
-
-    <h2>Stock Trends From 10/1/2019 to 10/1/2020</h2>
-    <!--User selects sector to view.-->
-    <select name="sector" id="sector" onchange="generateLineGraph(this.value)">
-        <option value="finance" selected>Finance</option>
-        <option value="socialMedia">Social Media</option>
-        <option value="healthcare">Healthcare</option>
-        <option value="retail">Retail</option>
-    </select>
-
-    <!--Line chart-->
-    <div id="multiplot"></div>
-
-    <h2>Daily Stock Gains/Losses By Company</h2>
-    <!-- Dropdown list for stock symbols -->
-    <label for="stockSymbol">Select a Stock Symbol:</label>
-    <select onchange="fetchDataAndCreateChart(this.value)">
-        <option value="amzn">Amazon.com, Inc. (AMZN)</option>
-        <option value="axp">American Express Company (AXP)</option>
-        <option value="bac">Bank of America Corp (BAC)</option>
-        <option value="goog">Alphabet Inc. Class C (GOOG)</option>
-        <option value="hd">Home Depot Inc. (HD)</option>
-        <option value="hsbc">HSBC Holdings plc (HSBC)</option>
-        <option value="jnj">Johnson & Johnson (JNJ)</option>
-        <option value="lly">Eli Lilly And Co. (LLY)</option>
-        <option value="lulu">Lululemon Athletica Inc. (LULU)</option>
-        <option value="mck">Mckesson Corp (MCK)</option>
-        <option value="meta">Meta Platforms Inc. (META)</option>
-        <option value="mrk">Merk & Co Inc. (MRK)</option>
-        <option value="ms">Morgan Stanley (MS)</option>
-        <option value="pins">Pinterest Inc. (PINS)</option>
-        <option value="snap">Snap Inc. (SNAP)</option>
-        <option value="spot">Spotify Technology SA (SPOT)</option>
-        <option value="tgt">Target Corp (TGT)</option>
-        <option value="unh">UnitedHealth Group Inc. (UNH)</option>
-        <option value="wfc" selected>Wells Fargo & Co. (WFC)</option>
-        <option value="wsm">Williams-Sonoma Inc. (WSM)</option>
-    </select>"
-
-    <!-- Render the chart-->
-    <div style="margin-left: 30px;">
-        <canvas id="bar-chart" width="1200" height="500"></canvas>
-    </div>
+    <section>
+        <h1>Stock Market on Lockdown</h1>
+    </section>
+    
+    <section>
+        <div class="top">
+            <div class="title">
+                <h1>Stock Trends From 10/1/2019 to 10/1/2020</h1>
+            </div>
+            <div class="select">
+                <!--User selects sector to view.-->
+                <select name="sector" id="sector" onchange="generateLineGraph(this.value)">
+                    <option value="finance" selected>Finance</option>
+                    <option value="socialMedia">Social Media</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="retail">Retail</option>
+                </select>
+            </div>
+        </div>
+        <!--Line chart-->
+        <div id="multiplot"></div>
+    </section>
+    
+    <section>
+        <div class="top">
+            <div class="title">
+                <h1>Daily Stock Gains/Losses By Company</h1>
+            </div>
+            <div class="select">
+                <!-- Dropdown list for stock symbols -->
+                <label for="stockSymbol">Select a Stock Symbol:</label>
+                <select onchange="fetchDataAndCreateChart(this.value)">
+                    <option value="amzn">Amazon.com, Inc. (AMZN)</option>
+                    <option value="axp">American Express Company (AXP)</option>
+                    <option value="bac">Bank of America Corp (BAC)</option>
+                    <option value="goog">Alphabet Inc. Class C (GOOG)</option>
+                    <option value="hd">Home Depot Inc. (HD)</option>
+                    <option value="hsbc">HSBC Holdings plc (HSBC)</option>
+                    <option value="jnj">Johnson & Johnson (JNJ)</option>
+                    <option value="lly">Eli Lilly And Co. (LLY)</option>
+                    <option value="lulu">Lululemon Athletica Inc. (LULU)</option>
+                    <option value="mck">Mckesson Corp (MCK)</option>
+                    <option value="meta">Meta Platforms Inc. (META)</option>
+                    <option value="mrk">Merk & Co Inc. (MRK)</option>
+                    <option value="ms">Morgan Stanley (MS)</option>
+                    <option value="pins">Pinterest Inc. (PINS)</option>
+                    <option value="snap">Snap Inc. (SNAP)</option>
+                    <option value="spot">Spotify Technology SA (SPOT)</option>
+                    <option value="tgt">Target Corp (TGT)</option>
+                    <option value="unh">UnitedHealth Group Inc. (UNH)</option>
+                    <option value="wfc" selected>Wells Fargo & Co. (WFC)</option>
+                    <option value="wsm">Williams-Sonoma Inc. (WSM)</option>
+                </select>
+            </div>
+        </div>
+        <!-- Render the chart-->
+        <canvas id="bar-chart" width="1100" height="400"></canvas>
+        
+    </section>
     
  
-    <!-- Lori's test code -->
-    <h2>Industry Stocks Over a Year (10/1/19 to 10/1/20)</h2>
-    
-    <!--Dropdown for selecting sectors for the percentChange graph-->
-    <label for="sectorSelection">Select Sector for Percent Change:</label>
-    <select id="sectorSelection" onchange="updatePercentChangeGraph(this.value)">
-        <option value="finance" selected>Finance</option>
-        <option value="socialMedia">Social Media</option>
-        <option value="healthcare">Healthcare</option>
-        <option value="retail">Retail</option>
-    </select>"
-    
-    <!-- Lori's test code -->
-     <div id="percentChangeGraph"></div>
+    <section>
+        <div class="top">
+            <div class="title">
+                <h1>Industry Stocks Over a Year (10/1/19 to 10/1/20)</h1>
+            </div>
+            <div class="select">
+                <!--Dropdown for selecting sectors for the percentChange graph-->
+                <label for="sectorSelection">Select Sector for Percent Change:</label>
+                <select id="sectorSelection" onchange="updatePercentChangeGraph(this.value)">
+                    <option value="finance" selected>Finance</option>
+                    <option value="socialMedia">Social Media</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="retail">Retail</option>
+                </select>
+            </div>
+        </div>
+        <!--Place for Percent Change Graph -->
+        <div id="percentChangeGraph"></div>
+    </section>
 
-
+    <!--Plotly library-->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+    <!--D3 library-->
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
+    <!--Chart.js library-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <!--Company metadata.-->

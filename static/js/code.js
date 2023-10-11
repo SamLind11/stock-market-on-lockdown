@@ -11,13 +11,16 @@ function generateLineGraph(selection) {
         title: selection === 'finance' ? 'Finance Stocks':
                selection === 'socialMedia' ? 'Social Media Stocks':
                selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
-        width: 1500,
-        height: 700,
+        width: 1000,
+        height: 500,
         xaxis: {
             nticks: 13, 
             tickmode: 'auto'},
         yaxis: {title: 'Stock Price (USD)'},
-
+        // Position Legend inside the graph.
+        legend: {
+            orientation: 'h',
+        },
         // Vertical line for first case of COVID date.
         shapes: [
         {
@@ -170,8 +173,8 @@ async function generateBarGraph(selection) {
         title: selection === 'finance' ? 'Finance Stocks':
                selection === 'socialMedia' ? 'Social Media Stocks':
                selection === 'healthcare' ? 'Healthcare Stocks': 'Retail Stocks', 
-        width: 1500,
-        height: 700
+        width: 1000,
+        height: 350
     };
 
     //Create the new graph with updated data and layout
@@ -233,6 +236,8 @@ function fetchDataAndCreateChart(selectSymbol) {
         options: {
             events: [],
             responsive: false,
+            maintainAspectRatio: true,
+            showScale: false,
             title: {
                 display: true,
                 text: `Daily Stock Gains/Losses for ${stockName} (${selectSymbol.toUpperCase()})`
