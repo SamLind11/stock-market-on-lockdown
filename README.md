@@ -14,7 +14,7 @@ We have prepared a Google Slides presentation titled "Stock Market on Lockdown" 
 - [View Google Slides Presentation](https://docs.google.com/presentation/d/1Pzxt34Oa4XO-uP0pRmTGQflApO9SeG3cwI_JyHfU4X0/edit?usp=sharing)
 
 
-The purpose of this project is to analyze the impacts of the COVID-19 pandemic on the stock market by utilizing data from 20 different stocks across four distinct categories. The dataset encompasses months leading up to and during the initial pandemic lockdowns, offering a visual representation of the market's transformation from pre-lockdown "normality" to its subsequent state during the pandemic.
+The purpose of this project is to analyze the impacts of the COVID-19 pandemic lockdown on the stock market by utilizing data from 20 different stocks across four distinct categories. The dataset encompasses months leading up to and during the initial pandemic lockdowns, offering a visual representation of the market's transformation from pre-lockdown "normality" to its subsequent state during the pandemic.
 
 ## Table of Contents
 - [Getting Started](#getting-started)
